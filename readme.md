@@ -1,40 +1,31 @@
 # imgconvert
 
-This is small tool for change photo format like png to jpg or jpg to webp etc. You can give one photo or full folder also, it will convert all photo inside. Very simple to use, no need big knowledge, just run command in terminal and it will do work.
+A simple CLI tool to convert images between formats. Works on a single file or a whole folder.
 
-## What it does
+## How to use it?
 
-- Converts between JPG, PNG, WEBP, BMP, GIF, TIFF, and HEIC (iPhone photos)
-- Works on a single file or an entire folder (with `--recursive` for subfolders too)
-- Shows before/after file size for each image, and total savings at the end
-- Handles transparency properly when converting to JPEG (flattens to white background)
-- Has a `--dry` mode to preview what will happen before actually converting anything
+Download `main.py`, install the requirements, and run it from your terminal:
 
-## Install
-
-```bash
-pip install Pillow
-pip install pillow-heif    # only if you have iPhone HEIC photos
+```
+pip install -r requirements.txt
+python main.py photo.png --to jpg
 ```
 
-Then make it runnable from anywhere:
+Or grab the built executable from the releases page if you don't want to deal with Python.
 
-**macOS / Linux**
-```bash
-cp imgconvert.py ~/.local/bin/imgconvert
-chmod +x ~/.local/bin/imgconvert
-```
+## Why I created this?
 
-**Windows**
-Put `imgconvert.py` in `C:\tools\` and create `imgconvert.bat` next to it:
-```bat
-@echo off
-python "%~dp0imgconvert.py" %*
-```
+I kept having to manually convert HEIC photos from my phone every time I wanted to upload them somewhere, so I made a script for it. Ended up adding folder support, quality control, etc. and turned it into a proper little tool.
 
-## Usage
+## Functions
 
-```bash
+* Convert between JPG, PNG, WEBP, BMP, GIF, TIFF, and HEIC
+* Convert a single file or a whole folder (with `--recursive` for subfolders)
+* Quality control for JPEG/WEBP output
+* Dry run mode to preview before converting
+* Shows file size before/after so you can see how much space you saved
+## Commands
+
 # single file
 imgconvert photo.png --to jpg
 
@@ -55,10 +46,5 @@ imgconvert ./photos --to webp --dry
 
 # iPhone HEIC photos to jpg
 imgconvert ./iphone_photos --to jpg --recursive
-```
 
-## Notes
 
-- If a source folder isn't given an output folder, it creates `<foldername>_converted` next to it.
-- HEIC support is optional — if `pillow-heif` isn't installed, HEIC files are just skipped with a warning instead of crashing the whole run.
-- For animated GIFs converted to a non-GIF format, only the first frame is kept.
